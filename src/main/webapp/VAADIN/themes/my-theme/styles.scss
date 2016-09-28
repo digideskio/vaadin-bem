@@ -1,0 +1,82 @@
+@import "../valo/valo.scss";
+@import "addons.scss";
+
+$v-included-components: remove($v-included-components, button);
+$v-included-components: remove($v-included-components, panel);
+
+$v-layout-spacing-vertical: 16px;
+$v-layout-margin-top: 16px;
+$v-layout-margin-bottom: 16px;
+
+$v-layout-spacing-horizontal: 8px;
+$v-layout-margin-right: 16px;
+$v-layout-margin-left: 16px;
+
+$my-shadow-color: rgba(0, 0, 0, .05);
+$v-shadow: 0 2px 3px $my-shadow-color;
+
+$my-border-width: 1px;
+$v-border: $my-border-width solid rgba($v-font-color, .3);
+
+$v-unit-size: 36px;
+$my-inner-box-height: 20px;
+$my-vertical-padding: .5 * ($v-unit-size - $my-inner-box-height) - $my-border-width;
+
+$v-font-weight: 400;
+$v-font-size: 14px;
+$v-line-height: $my-inner-box-height / $v-font-size;
+
+.my-theme {
+	@include addons;
+	@include valo;
+}
+
+%my-border-properties {
+	border: $v-border;
+	border-radius: $v-border-radius;
+}
+
+.v-button {
+	padding: $my-vertical-padding $v-layout-margin-right;
+
+	@extend %my-border-properties;
+
+	background: $v-panel-background-color;
+
+	line-height: $v-line-height;
+
+	cursor: $v-link-cursor;
+	@include user-select(none);
+}
+
+.v-button-primary {
+	background: $v-selection-color;
+
+	color: $v-background-color;
+}
+
+.v-panel {
+	@extend %my-border-properties;
+
+	background: $v-panel-background-color;
+	@include box-shadow($v-shadow);
+}
+
+.v-panel-caption {
+	padding: $my-vertical-padding $v-layout-margin-right;
+
+	border-bottom: $v-border;
+
+	background: $my-shadow-color;
+
+	line-height: $v-line-height;
+}
+
+.v-panel-well {
+	background: $my-shadow-color;
+	@include box-shadow(inset $v-shadow);
+
+	.v-panel-caption {
+		background: transparent;
+	}
+}
