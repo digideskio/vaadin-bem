@@ -9,9 +9,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -25,37 +23,39 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @Theme("my-theme")
 public class MyUI extends UI {
-
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        setContent(new VerticalLayout() {{
-            setMargin(true);
-            setSpacing(true);
+        setContent(new VerticalLayout() {
+            {
+                setMargin(true);
+                setSpacing(true);
 
-            addComponent(new Panel("Panel caption") {{
-                setContent(new HorizontalLayout() {{
+                addComponent(panel(""));
+                addComponent(panel(ValoTheme.PANEL_WELL));
+            }
+        });
+    }
+
+    private Panel panel(String styleName) {
+        return new Panel("Panel caption") {{
+            addStyleName(styleName);
+
+            setContent(new HorizontalLayout() {
+                {
                     setMargin(true);
                     setSpacing(true);
 
-                    addComponent(new Button("Click", FontAwesome.CLOUD));
-                    addComponent(new Button("Click", FontAwesome.CLOUD){{
-                        addStyleName(ValoTheme.BUTTON_PRIMARY);
-                    }});
-                }});
-            }});
-            addComponent(new Panel("Panel caption") {{
-                addStyleName(ValoTheme.PANEL_WELL);
-                setContent(new HorizontalLayout() {{
-                    setMargin(true);
-                    setSpacing(true);
+                    addComponent(button(""));
+                    addComponent(button(ValoTheme.BUTTON_PRIMARY));
+                }
+            });
+        }};
+    }
 
-                    addComponent(new Button("Click", FontAwesome.CLOUD));
-                    addComponent(new Button("Click", FontAwesome.CLOUD){{
-                        addStyleName(ValoTheme.BUTTON_PRIMARY);
-                    }});
-                }});
-            }});
-        }});
+    private Button button(String styleName) {
+        return new Button("Click", FontAwesome.CLOUD) {{
+            addStyleName(styleName);
+        }};
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

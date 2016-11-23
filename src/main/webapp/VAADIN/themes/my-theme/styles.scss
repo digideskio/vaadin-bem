@@ -1,9 +1,6 @@
 @import "../valo/valo.scss";
 @import "addons.scss";
 
-$v-included-components: remove($v-included-components, button);
-$v-included-components: remove($v-included-components, panel);
-
 $v-layout-spacing-vertical: 16px;
 $v-layout-margin-top: 16px;
 $v-layout-margin-bottom: 16px;
@@ -26,15 +23,22 @@ $v-font-weight: 400;
 $v-font-size: 14px;
 $v-line-height: $my-inner-box-height / $v-font-size;
 
+
+$v-included-components: remove($v-included-components, button);
+$v-included-components: remove($v-included-components, panel);
+
+
 .my-theme {
 	@include addons;
 	@include valo;
 }
 
+
 %my-border-properties {
 	border: $v-border;
 	border-radius: $v-border-radius;
 }
+
 
 .v-button {
 	padding: $my-vertical-padding $v-layout-margin-right;
@@ -55,11 +59,12 @@ $v-line-height: $my-inner-box-height / $v-font-size;
 	color: $v-background-color;
 }
 
+
 .v-panel {
 	@extend %my-border-properties;
 
 	background: $v-panel-background-color;
-	@include box-shadow($v-shadow);
+	box-shadow: $v-shadow;
 }
 
 .v-panel-caption {
@@ -74,7 +79,7 @@ $v-line-height: $my-inner-box-height / $v-font-size;
 
 .v-panel-well {
 	background: $my-shadow-color;
-	@include box-shadow(inset $v-shadow);
+	box-shadow: inset $v-shadow;
 
 	.v-panel-caption {
 		background: transparent;
