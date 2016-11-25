@@ -1,6 +1,8 @@
 @import "../valo/valo.scss";
 @import "addons.scss";
 
+$v-unit-size: 36px;
+
 $v-layout-spacing-vertical: 16px;
 $v-layout-margin-top: 16px;
 $v-layout-margin-bottom: 16px;
@@ -9,62 +11,87 @@ $v-layout-spacing-horizontal: 8px;
 $v-layout-margin-right: 16px;
 $v-layout-margin-left: 16px;
 
-$my-shadow-color: rgba(0, 0, 0, .05);
-$v-shadow: 0 2px 3px $my-shadow-color;
-
-$my-border-width: 1px;
-$v-border: $my-border-width solid rgba($v-font-color, .3);
-
-$v-unit-size: 36px;
 $my-inner-box-height: 20px;
+$my-border-width: 1px;
 $my-vertical-padding: .5 * ($v-unit-size - $my-inner-box-height) - $my-border-width;
+
+$my-shadow-color: rgba(0, 0, 0, .2);
+
+$v-border: $my-border-width solid $my-shadow-color;
+
+$my-light-shadow: 0 1px 2px 0 $my-shadow-color;
+$v-shadow: 0 2px 4px 0 $my-shadow-color;
+$my-dark-shadow: 0 3px 6px 0 $my-shadow-color;
+
+$my-button-primary-color: #00b4f0;
 
 $v-font-weight: 400;
 $v-font-size: 14px;
 $v-line-height: $my-inner-box-height / $v-font-size;
 
-
 $v-included-components: remove($v-included-components, button);
 $v-included-components: remove($v-included-components, panel);
 
-
-.my-theme {
-	@include addons;
-	@include valo;
-}
-
+@include addons;
+@include valo;
 
 %my-border-properties {
 	border: $v-border;
 	border-radius: $v-border-radius;
 }
 
-
 .v-button {
+	position: relative;
 	padding: $my-vertical-padding $v-layout-margin-right;
 
 	@extend %my-border-properties;
 
 	background: $v-panel-background-color;
+	box-shadow: $my-light-shadow;
 
 	line-height: $v-line-height;
 
 	cursor: $v-link-cursor;
+	@include transition(all 200ms);
 	@include user-select(none);
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		top: -1px;
+
+		box-shadow: $v-shadow;
+	}
+
+	&:active {
+		top: 0;
+
+		box-shadow: none;
+	}
 }
 
 .v-button-primary {
-	background: $v-selection-color;
+	background: $my-button-primary-color;
+	box-shadow: $v-shadow;
 
 	color: $v-background-color;
-}
 
+	&:hover {
+		box-shadow: $my-dark-shadow;
+	}
+
+	&:active {
+		box-shadow: none;
+	}
+}
 
 .v-panel {
 	@extend %my-border-properties;
 
 	background: $v-panel-background-color;
-	box-shadow: $v-shadow;
+	box-shadow: $my-light-shadow;
 }
 
 .v-panel-caption {
@@ -72,13 +99,15 @@ $v-included-components: remove($v-included-components, panel);
 
 	border-bottom: $v-border;
 
-	background: $my-shadow-color;
+	background: $v-background-color;
 
 	line-height: $v-line-height;
+
+	@include user-select(text);
 }
 
 .v-panel-well {
-	background: $my-shadow-color;
+	background: $v-background-color;
 	box-shadow: inset $v-shadow;
 
 	.v-panel-caption {
