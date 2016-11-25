@@ -19,6 +19,7 @@ $my-shadow-color: rgba(0, 0, 0, .2);
 
 $v-border: $my-border-width solid $my-shadow-color;
 
+$my-no-shadow: 0 0 0 0 $my-shadow-color;
 $my-light-shadow: 0 1px 2px 0 $my-shadow-color;
 $v-shadow: 0 2px 4px 0 $my-shadow-color;
 $my-dark-shadow: 0 3px 6px 0 $my-shadow-color;
@@ -42,6 +43,7 @@ $v-included-components: remove($v-included-components, panel);
 
 .v-button {
 	position: relative;
+	top: 0;
 	padding: $my-vertical-padding $v-layout-margin-right;
 
 	@extend %my-border-properties;
@@ -52,7 +54,7 @@ $v-included-components: remove($v-included-components, panel);
 	line-height: $v-line-height;
 
 	cursor: $v-link-cursor;
-	@include transition(all 200ms);
+	@include transition(all 250ms);
 	@include user-select(none);
 
 	&:focus {
@@ -68,7 +70,7 @@ $v-included-components: remove($v-included-components, panel);
 	&:active {
 		top: 0;
 
-		box-shadow: none;
+		box-shadow: $my-no-shadow;
 	}
 }
 
@@ -83,7 +85,7 @@ $v-included-components: remove($v-included-components, panel);
 	}
 
 	&:active {
-		box-shadow: none;
+		box-shadow: $my-no-shadow;
 	}
 }
 
